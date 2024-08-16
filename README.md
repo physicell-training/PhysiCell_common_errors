@@ -4,4 +4,4 @@ Common PhysiCell Errors (and fixes)
 
 ## Common PhysiCell Rules Errors 
 
-### Language Verison 1.0 
+### Language Version 1.0 

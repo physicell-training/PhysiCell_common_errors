@@ -1,7 +1,6 @@
 # PhysiCell_common_errors
 Common PhysiCell Errors (and fixes)
 
-
 ## Common PhysiCell Rules Errors 
 
 ### Language Version 1.0 
@@ -24,3 +23,41 @@ Now, there are three phagocytosis rates:
 __Solution:__ 
 To produce phagocytosis results guaranteed identical to simulations run in pre-v1.14.0 PhysiCell, replace the one rule targeting `phagocytose dead cell` with three rules targeting `phagocytose apoptotic cell`, `phatocytose necrotic cell`, and `phagocytose other dead cell`.
 Alternatively, if not all these death models are used in the model, only include the relevant rules.
+
+## Common Miscellaneous PhysiCell Errors
+
+## 1. `random_seed` not found in User Parameters.
+__Error message:__
+```
+ERROR : Unknown parameter random_seed ! Quitting.
+```
+__Background:__
+In PhysiCell v1.14.0 (released circa August 2024), the `random_seed` can be specified within the `<options>` element of the configuration file.
+The purpose is to make it more flexible to allow for the user to set the random seed by the system clock to allow for batches of different simulations.
+While including in `user_parameters` is still acceptable, this is now discouraged.
+However, `custom.cpp` taken from pre-v1.14.0 projects will likely call `SeedRandom(parameters.ints("random_seed"));` without first checking the existence of `random_seed` within `user_parameters`.
+
+__Solution:__ 
+Find the call to `SeedRandom(parameters.ints("random_seed"));` in the project-specific code.
+_This is almost certainly in `create_cell_types( void )` at the top of `custom.cpp`._
+Either remove this call or replace with
+```
+if (parameters.ints.find_index("random_seed") != -1)
+{
+    SeedRandom(parameters.ints("random_seed"));
+}
+```
+It is recommended to remove it and instead include `random_seed` in `<options>`:
+```
+<options>
+...
+    <random_seed>0</random_seed>
+</options>
+```
+OR to use the system clock:
+```
+<options>
+...
+    <random_seed>system_clock</random_seed>
+</options>
+```

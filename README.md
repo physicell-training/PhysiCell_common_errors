@@ -39,7 +39,7 @@ However, `custom.cpp` taken from pre-v1.14.0 projects will likely call `SeedRand
 
 __Solution:__ 
 Find the call to `SeedRandom(parameters.ints("random_seed"));` in the project-specific code.
-_This is almost certainly in `create_cell_types( void )` at the top of `custom.cpp`._
+__This is almost certainly in `create_cell_types( void )` at the top of `custom.cpp`.__
 Either remove this call or replace with
 ```
 if (parameters.ints.find_index("random_seed") != -1)

@@ -3,7 +3,7 @@ Common PhysiCell Errors (and fixes)
 
 ## Common PhysiCell Rules Errors 
 
-### 1. Error adding rule for `phagocytose dead cell` {#error-adding-rule-phagocytose-dead-cell}
+### 1. Error adding rule for `phagocytose dead cell` <a name="phagocytose-dead-cell-error"></a>
 __Error message:__
 ```
 Warning! Attempted to add behavior phagocytose dead cell which is not in the dictionary.
@@ -30,7 +30,7 @@ __Error message:__
 ```
 __Background:__
 In [PhysiCell v1.14.0](https://github.com/MathCancer/PhysiCell/releases/tag/1.14.0), several changes were made to the rules language prompting a change to the rules version.
-Phagoctyosis changed (see [above](#error-adding-rule-phagocytose-dead-cell)) and the meaning of `damage_rate` also changed from indicating the rate of damage being dealt to another cell (v2.0) to the rate of damage accumulation by the cell (v3.0).
+Phagoctyosis changed (see [above](#phagocytose-dead-cell-error)) and the meaning of `damage_rate` also changed from indicating the rate of damage being dealt to another cell (v2.0) to the rate of damage accumulation by the cell (v3.0).
 
 __Solution:__
 Update the configuration file so that the `version` attribute for the `ruleset` element is set to `"3.0"`:

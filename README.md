@@ -1,5 +1,6 @@
-# PhysiCell_common_errors
-Common PhysiCell Errors (and fixes)
+<p align="right">See Table of Contents ^</p>
+
+# Common errors in PhysiCell and their solutions
 
 ## Common PhysiCell Rules Errors 
 
